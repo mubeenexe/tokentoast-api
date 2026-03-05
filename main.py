@@ -1,6 +1,10 @@
-def main():
-    print("Hello from tokentoast-api!")
+from contextlib import asynccontextmanager
+from fastapi import FastAPI
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # startup: connect redis, run checks
+    yield
+    # shutdown: close connections cleanly
 
-if __name__ == "__main__":
-    main()
+app = FastAPI(lifespan=lifespan)
