@@ -11,6 +11,7 @@ class Settings(BaseSettings):
 
     ACCESS_TOKEN_TTL: int = 30 * 60 # 30 minutes
     REFRESH_TOKEN_TTL: int = 7 * 24 * 60 * 60 # 7 days
+    ALGORITHM: str = "HS256"
     BCRYPT_ROUNDS: int = 12
 
     API_PREFIX: str = "/api"
