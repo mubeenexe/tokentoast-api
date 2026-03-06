@@ -1,4 +1,5 @@
 import hashlib
+import secrets
 from passlib.context import CryptContext
 
 from jose import jwt, JWTError
@@ -40,3 +41,8 @@ def verify_jwt_token(token: str) -> dict:
     if payload.get("type") != "access":
         raise JWTError("Invalid token type")
     return payload
+
+def _get_dummy_hash() -> str:
+    if not hasattr(_get_dummy_hash, "_cached"):
+        _get_dummy_hash._cached = hash_password(secrets.token_hex(32))  # Unmatchable hash
+    return _get_dummy_hash._cached

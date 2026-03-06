@@ -25,6 +25,9 @@ class Settings(BaseSettings):
     SMTP_PASS: str = ""
     SMTP_FROM: str = ""
 
+    LOCK_THRESHOLD: int = 5
+    LOCKOUT_DURATION_MIN: int = 30
+
     @property
     def API_V1_PREFIX(self) -> str:
         return f"{self.API_PREFIX}/{self.API_VERSION}"

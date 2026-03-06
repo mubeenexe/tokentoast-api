@@ -5,8 +5,19 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.session import get_db
 from app.models.enums import UserRole
+from app.models.token import RefreshToken
 from app.models.user import User
 from app.core.security import verify_jwt_token
+from app.repositories.token_repo import TokenRepository
+from app.repositories.user_repo import UserRepository
+
+
+async def get_user_repo(db: AsyncSession = Depends(get_db)) -> UserRepository:
+    return UserRepository(User, db)
+
+
+async def get_token_repo(db: AsyncSession = Depends(get_db)) -> TokenRepository:
+    return TokenRepository(RefreshToken, db)
 
 async def get_current_user(
     access_token: str | None = Cookie(None),
